@@ -92,10 +92,22 @@ ConnectedDeviceInfo	ConnectedMtpDevices::GetDeviceInfo(int index)
 	ConnectedDeviceInfo info;
 	info.bus_location = m_devs[index].bus_location;
 	info.devnum = m_devs[index].devnum;
-	info.device_flags = m_devs[index].device_entry.device_flags;
-	info.product = m_devs[index].device_entry.product;
+	if (m_devs[index].device_entry.device_flags > 0){
+		info.device_flags = m_devs[index].device_entry.device_flags;
+	} else {
+		info.device_flags = 0;
+	}
+	if (m_devs[index].device_entry.product != NULL){
+		info.product = m_devs[index].device_entry.product;
+	} else {
+		info.product = "unknown";
+	}
 	info.product_id = m_devs[index].device_entry.product_id;
-	info.vendor = m_devs[index].device_entry.vendor;
+	if (m_devs[index].device_entry.vendor != NULL){
+		info.vendor = m_devs[index].device_entry.vendor;
+	} else {
+		info.vendor = "unknown";
+	}
 	info.vendor_id = m_devs[index].device_entry.vendor_id;
 
 	return info;
